@@ -58,7 +58,7 @@ check_installed_tools git
 check_installed_tools node
 
 # A. Leer version de la aplicacion
-if [ -f "$TEMP_DIR/package.json" ]; then
+if [ -f "package.json" ]; then
     APP_VERSION=$(jq -r '.version' package.json)
     REPO_NAME=$(jq -r '.name' package.json)
     print_message $YELLOW "Versión de la aplicación: $APP_VERSION"
@@ -86,7 +86,7 @@ EOF
 print_message $YELLOW "Eliminando imagenes antiguos..."
 
 # Check if the images exist first
-docker compose down -v
+docker compose down 
 
 # Punto 3
 
