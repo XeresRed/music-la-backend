@@ -1,0 +1,39 @@
+services:
+  backend:
+    image: musicla-strapi
+    restart: always
+    container_name: strapi-back
+    ports:
+      - 1337:1337
+    depends_on:
+      - database
+  database:
+    image: postgres
+    restart: always
+    container_name: postgres_db
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: root
+      POSTGRES_DB: musicla
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  pgAdmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cam960210@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - database
+volumes:
+  local_pgdata:
+  pgadmin-data:
