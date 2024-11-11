@@ -3,6 +3,7 @@ services:
     image: musicla-strapi
     restart: always
     container_name: strapi-back
+    build: ./
     ports:
       - 1337:1337
     depends_on:
